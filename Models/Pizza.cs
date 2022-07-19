@@ -26,6 +26,12 @@ namespace la_mia_pizzeria.Models
         [Required(ErrorMessage = "Gratis è morto.")]
         public decimal Price { get; set; }
 
+
+        //relazioni esterne
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+
+
         public Pizza()
         {
 

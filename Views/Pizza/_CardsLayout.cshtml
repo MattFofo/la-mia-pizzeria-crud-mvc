@@ -24,6 +24,17 @@
                                 <h5 class="card-title">@pizza.Name</h5>
                                 <p class="card-text">@pizza.Description</p>
                                 <p class="card-text"><small class="text-muted">@pizza.Price &euro;</small></p>
+
+                                <a class="btn btn-warning" asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </a>
+                            
+                                @using (Html.BeginForm(FormMethod.Post, new { @class = "d-inline-block" })) 
+                                {
+                                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id ">
+                                        <i class="fa-solid fa-trash-can-arrow-up"></i>
+                                    </button>
+                                }
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 ﻿@model Pizza
 
 <div class="container py-4">
-    <form class="p-4" asp-controller="Pizza" asp-action="Create" method="post">
+    <form class="p-4 form-create" asp-controller="Pizza" asp-action="Create" method="post">
         @Html.AntiForgeryToken()
 
         <div class="my-3">
