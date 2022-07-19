@@ -10,6 +10,7 @@
       <img src=@Model.Image class="card-img img-card-details" alt=@Model.Name>
       <div class="card-img-overlay">
         <h5 class="card-title fs-1">@Model.Name</h5>
+        <div class="badge bg-info text-dark">@Model.Category.Name</div>
         <p class="card-text fs-3">@Model.Description</p>
         <p class="card-text fs-3">@Model.Price &euro;</p>
         <a class="btn btn-primary" asp-controller="Pizza" asp-action="Index">Torna alla lista</a>

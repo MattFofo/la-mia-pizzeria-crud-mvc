@@ -1,4 +1,7 @@
 ﻿@model Pizza
+@{
+    List<Category> categories = ViewData["categories"] as List<Category>;
+}
 
 <div class="container py-4">
     <form class="p-4 form-create" asp-controller="Pizza" asp-action="Create" method="post">
@@ -27,6 +30,15 @@
             <strong>Prezzo</strong>
             <input asp-for="Price" class="d-block w-100" />
             <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Category</strong>
+            <select asp-for="CategoryId" class="d-block w-100" />
+            <option value=""></option>
+            @foreach (var category in categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
         </div>
         <div class="text-end">
             <input type="submit" class="btn btn-small btn-info" value="Salva">

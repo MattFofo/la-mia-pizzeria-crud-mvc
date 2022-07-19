@@ -27,7 +27,7 @@
                         <td class="w-25"><img class="img-thumbnail w-50 h-50" src="@pizza.Image" /></td>
                         <td>@pizza.Description</td>
                         <td>@pizza.Price &euro;</td>
-                        <td class="tag">@pizza.Category.Name</td>
+                        <td class="badge bg-info text-dark">@pizza.Category.Name</td>
                         <td>
                             <a class="btn btn-warning" asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">
                                 <i class="fa-solid fa-pencil"></i>

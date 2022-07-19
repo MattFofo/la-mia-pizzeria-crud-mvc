@@ -26,7 +26,7 @@ namespace la_mia_pizzeria.Controllers
         {
             using(PizzeriaContext context = new PizzeriaContext())
             {
-                Pizza pizza = context.Pizzas.Where(pizza => pizza.Id == id).FirstOrDefault();
+                Pizza pizza = context.Pizzas.Where(pizza => pizza.Id == id).Include(p => p.Category).FirstOrDefault();
 
                 return View(pizza);
             }
@@ -35,6 +35,15 @@ namespace la_mia_pizzeria.Controllers
         // GET: PizzasController/Create
         public ActionResult Create()
         {
+            using (PizzeriaContext context = new PizzeriaContext())
+            {
+
+                List<Category> categories = context.Categories.ToList();
+
+                ViewData["categories"] = categories;
+
+            }
+
             return View();
         }
 
@@ -66,6 +75,10 @@ namespace la_mia_pizzeria.Controllers
 
                 if (pizza == null) return NotFound();
 
+                List<Category> categories = context.Categories.ToList();
+
+                ViewData["categories"] = categories;
+
                 return View(pizza);
             }
 
@@ -88,6 +101,7 @@ namespace la_mia_pizzeria.Controllers
                 pizzaEdited.Description = pizza.Description;
                 pizzaEdited.Image = pizza.Image;
                 pizzaEdited.Price = pizza.Price;
+                //pizzaEdited.CategoryId = pizza.CategoryId;
 
                 context.Update(pizzaEdited);
                 context.SaveChanges();

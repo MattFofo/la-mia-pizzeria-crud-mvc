@@ -1,4 +1,8 @@
-﻿@model Pizza
+﻿@{
+    List<Category> categories = ViewData["categories"] as List<Category>;
+}
+
+@model Pizza
 
 <div class="container py-4">
     <form class="p-4 form-edit" asp-controller="Pizza" asp-action="Edit" asp-route-id="@Model.Id" method="post">
@@ -28,8 +32,26 @@
             <input asp-for="Price" class="d-block w-100" />
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
+        <div class="mb-3">
+            <strong>Category</strong>
+            <select asp-for="CategoryId" class="d-block w-100" />
+            <option value=""></option>
+            @foreach (var category in categories)
+            {
+                if (Model.CategoryId == category.Id)
+                {
+                    <option value="@category.Id" selected>@category.Name</option>
+                }
+                else
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            }
+        </div>
         <div class="text-end">
             <input type="submit" class="btn btn-small btn-info" value="Salva">
         </div>
     </form>
 </div>
+
+
