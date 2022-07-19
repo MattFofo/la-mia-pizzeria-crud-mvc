@@ -101,7 +101,7 @@ namespace la_mia_pizzeria.Controllers
                 pizzaEdited.Description = pizza.Description;
                 pizzaEdited.Image = pizza.Image;
                 pizzaEdited.Price = pizza.Price;
-                //pizzaEdited.CategoryId = pizza.CategoryId;
+                pizzaEdited.CategoryId = pizza.CategoryId;
 
                 context.Update(pizzaEdited);
                 context.SaveChanges();
