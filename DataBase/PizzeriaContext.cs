@@ -1,7 +1,7 @@
-﻿using la_mia_pizzeria_static.Models;
+﻿using la_mia_pizzeria.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace la_mia_pizzeria_static.DataBase
+namespace la_mia_pizzeria.DataBase
 {
     public class PizzeriaContext : DbContext
     {

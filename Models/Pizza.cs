@@ -1,8 +1,8 @@
-﻿using la_mia_pizzeria_static.ValidatorAttributes;
+﻿using la_mia_pizzeria.ValidatorAttributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace la_mia_pizzeria_static.Models
+namespace la_mia_pizzeria.Models
 {
     public class Pizza
     {

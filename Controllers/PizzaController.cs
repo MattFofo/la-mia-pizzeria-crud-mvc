@@ -1,9 +1,9 @@
-﻿using la_mia_pizzeria_static.DataBase;
-using la_mia_pizzeria_static.Models;
+﻿using la_mia_pizzeria.DataBase;
+using la_mia_pizzeria.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace la_mia_pizzeria_static.Controllers
+namespace la_mia_pizzeria.Controllers
 {
     public class PizzaController : Controller
     {

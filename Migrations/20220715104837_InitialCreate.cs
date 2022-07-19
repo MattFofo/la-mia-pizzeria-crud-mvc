@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace la_mia_pizzeria_static.Migrations
+namespace la_mia_pizzeria.Migrations
 {
     public partial class InitialCreate : Migration
     {

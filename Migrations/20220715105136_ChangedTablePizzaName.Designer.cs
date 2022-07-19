@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using la_mia_pizzeria_static.DataBase;
+using la_mia_pizzeria.DataBase;
 
 #nullable disable
 
-namespace la_mia_pizzeria_static.Migrations
+namespace la_mia_pizzeria.Migrations
 {
     [DbContext(typeof(PizzeriaContext))]
     [Migration("20220715105136_ChangedTablePizzaName")]
@@ -23,7 +23,7 @@ namespace la_mia_pizzeria_static.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("la_mia_pizzeria_static.Models.Pizza", b =>
+            modelBuilder.Entity("la_mia_pizzeria.Models.Pizza", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
