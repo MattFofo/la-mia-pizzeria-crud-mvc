@@ -2,6 +2,7 @@
 using la_mia_pizzeria.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria.Controllers
 {
@@ -13,7 +14,7 @@ namespace la_mia_pizzeria.Controllers
             using (PizzeriaContext context = new PizzeriaContext())
             {
 
-                List<Pizza> listPizzas = context.Pizzas.ToList();
+                List<Pizza> listPizzas = context.Pizzas.Include(p => p.Category).ToList();
 
                 return View(listPizzas);
             }

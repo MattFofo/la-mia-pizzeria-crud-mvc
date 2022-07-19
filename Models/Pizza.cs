@@ -28,6 +28,7 @@ namespace la_mia_pizzeria.Models
 
 
         //relazioni esterne
+        [ForeignKey("CategoryId")]
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 
