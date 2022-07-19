@@ -7,6 +7,7 @@
             <td>Immagine</td>
             <td>Descrizione</td>
             <td>Prezzo</td>
+            <td>Azioni</td>
         </tr>
     </thead>
     @{
@@ -27,6 +28,9 @@
                         <td class="w-25"><img class="img-thumbnail w-50 h-50" src="@pizza.Image" /></td>
                         <td>@pizza.Description</td>
                         <td>@pizza.Price &euro;</td>
+                        <td>
+                            <a asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">edit</a>
+                        </td>
                     </tr>
                 }
             }

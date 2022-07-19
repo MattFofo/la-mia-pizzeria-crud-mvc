@@ -42,10 +42,8 @@ namespace la_mia_pizzeria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Pizza newPizza)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(newPizza);
-            }
+            if (!ModelState.IsValid) return View(newPizza);
+
             using (PizzeriaContext context = new PizzeriaContext())
             {
 
@@ -61,21 +59,39 @@ namespace la_mia_pizzeria.Controllers
         // GET: PizzasController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            using (PizzeriaContext context = new PizzeriaContext())
+            {
+                Pizza pizza = context.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+
+                if (pizza == null) return NotFound();
+
+                return View(pizza);
+            }
+
         }
 
         // POST: PizzasController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Pizza pizza)
         {
-            try
+            if (!ModelState.IsValid) return View(pizza);
+
+            using(PizzeriaContext context = new PizzeriaContext())
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
+                Pizza pizzaEdited = context.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+
+                if (pizzaEdited == null) return NotFound();
+
+                pizzaEdited.Name = pizza.Name;
+                pizzaEdited.Description = pizza.Description;
+                pizzaEdited.Image = pizza.Image;
+                pizzaEdited.Price = pizza.Price;
+
+                context.Update(pizzaEdited);
+                context.SaveChanges();
+
+                return RedirectToAction("Index");
             }
         }
 
