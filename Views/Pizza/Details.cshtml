@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Dettagli Pizza";
+}
+
+@model Pizza
+
+
+<div class="container py-5">
+    <div class="card-pizza-details position-relative">
+      <img src=@Model.Image class="card-img img-card-details" alt=@Model.Name>
+      <div class="card-img-overlay">
+        <h5 class="card-title fs-1">@Model.Name</h5>
+        <p class="card-text fs-3">@Model.Description</p>
+        <p class="card-text fs-3">@Model.Price &euro;</p>
+        <a class="btn btn-primary" asp-controller="Pizza" asp-action="Index">Torna alla lista</a>
+      </div>
+    </div>
+</div>
+
+
+
+
+
