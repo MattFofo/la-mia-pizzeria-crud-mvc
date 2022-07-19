@@ -18,8 +18,6 @@
         } else
         {
             <tbody>
-
-
             @{
                 foreach (var pizza in Model)
                 {
@@ -29,12 +27,17 @@
                         <td>@pizza.Description</td>
                         <td>@pizza.Price &euro;</td>
                         <td>
-                            <a asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">edit</a>
+                            <a class="btn btn-warning" asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">edit</a>
+                            @*<a class="btn btn-danger" asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id ">delete</a>*@
+                            
+                            @using (Html.BeginForm()) 
+                            {
+                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id ">Delete</button>
+                            }
                         </td>
                     </tr>
                 }
             }
-
             </tbody>  
         }
     }
