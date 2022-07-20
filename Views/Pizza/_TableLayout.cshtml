@@ -24,7 +24,7 @@
                 {
                     <tr class="py-2">
                         <td><a asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id">@pizza.Name</a></td>
-                        <td class="w-25"><img class="img-thumbnail w-50 h-50" src="@pizza.Image" /></td>
+                        <td class="w-25"><img class="img-thumbnail w-50 h-50" src="@pizza.Image" onerror="this.src ='https://picsum.photos/200'"/></td>
                         <td>@pizza.Description</td>
                         <td>@pizza.Price &euro;</td>
                         <td class="badge bg-info text-dark">@pizza.Category.Name</td>

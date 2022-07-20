@@ -7,7 +7,7 @@
 
 <div class="container py-5">
     <div class="card-pizza-details position-relative">
-      <img src=@Model.Image class="card-img img-card-details" alt=@Model.Name>
+      <img src=@Model.Image class="card-img img-card-details" onerror="this.src ='https://picsum.photos/400'" alt=@Model.Name>
       <div class="card-img-overlay">
         <h5 class="card-title fs-1">@Model.Name</h5>
         <div class="badge bg-info text-dark">@Model.Category.Name</div>

@@ -17,7 +17,7 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                             <a class="" asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id">
-                                <img src=@pizza.Image class="img-fluid rounded-start" alt=@pizza.Name>                    
+                                <img src=@pizza.Image class="img-fluid rounded-start" onerror="this.src ='https://picsum.photos/200'" alt=@pizza.Name>                    
                             </a>
                             </div>
                             <div class="col-md-8">
