@@ -27,7 +27,7 @@
                         <td class="w-25"><img class="img-thumbnail w-50 h-50" src="@pizza.Image" onerror="this.src ='https://picsum.photos/200'"/></td>
                         <td>@pizza.Description</td>
                         <td>@pizza.Price &euro;</td>
-                        <td class="badge bg-info text-dark">@pizza.Category.Name</td>
+                        <td><span class="badge bg-info text-dark">@pizza.Category.Name</span></td>
                         <td>
                             <a class="btn btn-warning" asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">
                                 <i class="fa-solid fa-pencil"></i>
