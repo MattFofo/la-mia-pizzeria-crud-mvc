@@ -98,9 +98,13 @@ namespace la_mia_pizzeria.Controllers
 
                 List<Category> categories = context.Categories.ToList();
 
-                ViewData["categories"] = categories;
+                PizzaPivotCrud model = new PizzaPivotCrud();
+                model.Pizza = pizza;
+                model.Categories = categories;
 
-                return View(pizza);
+                //ViewData["categories"] = categories;
+
+                return View(model);
             }
 
         }
@@ -108,23 +112,24 @@ namespace la_mia_pizzeria.Controllers
         // POST: PizzasController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Pizza pizza)
+        public ActionResult Edit(int id, PizzaPivotCrud model)
         {
-            if (!ModelState.IsValid) return View(pizza);
+            if (!ModelState.IsValid) return View(model);
 
             using(PizzeriaContext context = new PizzeriaContext())
             {
-                Pizza pizzaEdited = context.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+                Pizza pizzaToEdit = context.Pizzas.Where(p => p.Id == id).FirstOrDefault();
 
-                if (pizzaEdited == null) return NotFound();
+                if (pizzaToEdit == null) return NotFound();
 
-                pizzaEdited.Name = pizza.Name;
-                pizzaEdited.Description = pizza.Description;
-                pizzaEdited.Image = pizza.Image;
-                pizzaEdited.Price = pizza.Price;
-                pizzaEdited.CategoryId = pizza.CategoryId;
+                pizzaToEdit.Name = model.Pizza.Name;
+                pizzaToEdit.Description = model.Pizza.Description;
+                pizzaToEdit.Image = model.Pizza.Image;
+                pizzaToEdit.Price = model.Pizza.Price;
+                pizzaToEdit.Category = model.Pizza.Category;
+                pizzaToEdit.CategoryId = model.Pizza.CategoryId;
 
-                context.Update(pizzaEdited);
+                context.Update(pizzaToEdit);
                 context.SaveChanges();
 
                 return RedirectToAction("Index");
