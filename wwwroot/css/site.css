@@ -51,6 +51,10 @@ html {
     border-radius: 12px;
 }
 
+.card-pizza-list {
+    min-height: 200px;
+}
+
 .table-pizza-list {
     background-color: ghostwhite;
 }

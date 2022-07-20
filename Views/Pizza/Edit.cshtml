@@ -35,7 +35,6 @@
         <div class="mb-3">
             <strong>Category</strong>
             <select asp-for="CategoryId" class="d-block w-100" />
-            <option value=""></option>
             @foreach (var category in categories)
             {
                 if (Model.CategoryId == category.Id)

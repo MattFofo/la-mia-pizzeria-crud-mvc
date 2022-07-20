@@ -40,22 +40,43 @@ namespace la_mia_pizzeria.Controllers
 
                 List<Category> categories = context.Categories.ToList();
 
-                ViewData["categories"] = categories;
+                PizzaPivotCrud pizzaPivotCrud = new PizzaPivotCrud();
+                pizzaPivotCrud.Categories = categories;
+                pizzaPivotCrud.Pizza = new Pizza();
 
+                //ViewData["categories"] = categories;
+
+                return View(pizzaPivotCrud);
             }
 
-            return View();
         }
 
         // POST: PizzasController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Pizza newPizza)
+        public ActionResult Create(PizzaPivotCrud formData)
         {
-            if (!ModelState.IsValid) return View(newPizza);
-
             using (PizzeriaContext context = new PizzeriaContext())
             {
+                if (!ModelState.IsValid)
+                {
+                    PizzaPivotCrud model = new PizzaPivotCrud();
+
+                    model.Categories = context.Categories.ToList();
+                    model.Pizza = formData.Pizza;
+
+                    return View(model);
+                }
+
+                Pizza newPizza = new Pizza();
+                newPizza.Name = formData.Pizza.Name;
+                newPizza.Image = formData.Pizza.Image;
+                newPizza.Description = formData.Pizza.Description;
+                newPizza.Price = formData.Pizza.Price;
+                newPizza.Category = formData.Pizza.Category;
+                newPizza.CategoryId = formData.Pizza.CategoryId;
+
+
 
                 context.Pizzas.Add(newPizza);
                 context.SaveChanges();
