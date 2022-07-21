@@ -42,6 +42,7 @@ namespace la_mia_pizzeria.Controllers
                 List<Category> categories = context.Categories.ToList();
 
                 PizzaPivotCrud pizzaPivotCrud = new PizzaPivotCrud();
+
                 pizzaPivotCrud.Categories = categories;
                 pizzaPivotCrud.Pizza = new Pizza();
 
@@ -66,6 +67,7 @@ namespace la_mia_pizzeria.Controllers
 
                     model.Categories = context.Categories.ToList();
                     model.Pizza = formData.Pizza;
+                    model.Ingredients = GetIngredientsList();
 
                     return View(model);
                 }
@@ -78,7 +80,19 @@ namespace la_mia_pizzeria.Controllers
                 newPizza.Category = formData.Pizza.Category;
                 newPizza.CategoryId = formData.Pizza.CategoryId;
 
+                newPizza.Ingredients = new List<Ingredient>();
 
+                if (formData.SelectedIngredients != null)
+                {
+                    foreach (string selectedIngredientId in formData.SelectedIngredients)
+                    {
+                        int selectedIntIngredientId = int.Parse(selectedIngredientId);
+
+                        Ingredient ingredient = context.Ingredients.Where(ingredient => ingredient.Id == selectedIntIngredientId).FirstOrDefault();
+
+                        newPizza.Ingredients.Add(ingredient);
+                    }
+                }
 
                 context.Pizzas.Add(newPizza);
                 context.SaveChanges();
@@ -86,7 +100,6 @@ namespace la_mia_pizzeria.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-
         }
 
         // GET: PizzasController/Edit/5
@@ -104,7 +117,6 @@ namespace la_mia_pizzeria.Controllers
                 model.Pizza = pizza;
                 model.Categories = categories;
 
-                //ViewData["categories"] = categories;
 
                 return View(model);
             }
