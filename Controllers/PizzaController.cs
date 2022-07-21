@@ -2,6 +2,7 @@
 using la_mia_pizzeria.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria.Controllers
@@ -44,12 +45,13 @@ namespace la_mia_pizzeria.Controllers
                 pizzaPivotCrud.Categories = categories;
                 pizzaPivotCrud.Pizza = new Pizza();
 
-                //ViewData["categories"] = categories;
+                pizzaPivotCrud.Ingredients = GetIngredientsList();
 
                 return View(pizzaPivotCrud);
             }
 
         }
+
 
         // POST: PizzasController/Create
         [HttpPost]
@@ -159,6 +161,25 @@ namespace la_mia_pizzeria.Controllers
                 context.SaveChanges();
 
                 return RedirectToAction("Index");
+            }
+        }
+
+        private static List<SelectListItem> GetIngredientsList()
+        {
+
+            using (PizzeriaContext context = new PizzeriaContext())
+            {
+                List<SelectListItem> ingredientsList = new List<SelectListItem>();
+
+                List<Ingredient> ingredients = context.Ingredients.ToList();
+
+                foreach (Ingredient ingredient in ingredients)
+                {
+                    ingredientsList.Add(new SelectListItem { Text = ingredient.Name, Value = ingredient.Id.ToString() });
+                }
+
+
+                return ingredientsList;
             }
         }
     }
