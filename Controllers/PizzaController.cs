@@ -137,11 +137,22 @@ namespace la_mia_pizzeria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, PizzaPivotCrud model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                using (PizzeriaContext context = new PizzeriaContext())
+                {
+
+                    model.Categories = context.Categories.ToList();
+                    model.Ingredients = GetIngredientsList();
+
+                    return View(model);
+
+                }
+            }
 
             using(PizzeriaContext context = new PizzeriaContext())
             {
-                Pizza pizzaToEdit = context.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+                Pizza pizzaToEdit = context.Pizzas.Where(p => p.Id == id).Include(p => p.Ingredients).FirstOrDefault();
 
                 if (pizzaToEdit == null) return NotFound();
 
@@ -152,18 +163,26 @@ namespace la_mia_pizzeria.Controllers
                 pizzaToEdit.Category = model.Pizza.Category;
                 pizzaToEdit.CategoryId = model.Pizza.CategoryId;
 
-                context.Update(pizzaToEdit);
+                pizzaToEdit.Ingredients.Clear();
+
+                if (model.SelectedIngredients != null)
+                {
+                    foreach (string selectedIngredientId in model.SelectedIngredients)
+                    {
+                        int selectedIntIngredientId = int.Parse(selectedIngredientId);
+
+                        Ingredient ingredient = context.Ingredients.Where(ingredient => ingredient.Id == selectedIntIngredientId).FirstOrDefault();
+
+                        pizzaToEdit.Ingredients.Add(ingredient);
+                    }
+                }
+
+                //context.Update(pizzaToEdit);
                 context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
         }
-
-        //// GET: PizzasController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
 
         // POST: PizzasController/Delete/5
         [HttpPost]
