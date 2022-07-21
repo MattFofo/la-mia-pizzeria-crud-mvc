@@ -27,7 +27,7 @@ namespace la_mia_pizzeria.Controllers
         {
             using(PizzeriaContext context = new PizzeriaContext())
             {
-                Pizza pizza = context.Pizzas.Where(pizza => pizza.Id == id).Include(p => p.Category).FirstOrDefault();
+                Pizza pizza = context.Pizzas.Where(pizza => pizza.Id == id).Include(p => p.Category).Include(p => p.Ingredients).FirstOrDefault();
 
                 return View(pizza);
             }
