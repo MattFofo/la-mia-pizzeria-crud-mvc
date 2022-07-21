@@ -29,16 +29,22 @@
                         <td>@pizza.Price &euro;</td>
                         <td><span class="badge bg-info text-dark">@pizza.Category.Name</span></td>
                         <td>
-                            <a class="btn btn-warning" asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
+                            <div class="d-flex flex-nowrap gx-2">
+                                <a class="btn btn-info me-1" asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+
+                                <a class="btn btn-warning me-1" asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </a>
                             
-                            @using (Html.BeginForm(FormMethod.Post, new { @class = "d-inline-block" })) 
-                            {
-                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id ">
-                                    <i class="fa-solid fa-trash-can-arrow-up"></i>
-                                </button>
-                            }
+                                @using (Html.BeginForm(FormMethod.Post, new { @class = "d-inline-block" })) 
+                                {
+                                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id ">
+                                        <i class="fa-solid fa-trash-can-arrow-up"></i>
+                                    </button>
+                                }
+                            </div>
                         </td>
                     </tr>
                 }

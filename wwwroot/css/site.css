@@ -46,6 +46,10 @@ html {
     background-size: cover;
 }
 
+
+
+/* cards */
+
 .card-pizza-list, .card-pizza-details, .table-pizza-list {
     box-shadow: -4px -3px 45px 21px rgba(0,0,0,0.35);
     border-radius: 12px;
@@ -58,6 +62,7 @@ html {
 .card-pizza-details {
     max-width: 500px;
 }
+
 
 .table-pizza-list {
     background-color: ghostwhite;
@@ -78,3 +83,6 @@ html {
 .footer-social-links-container > a {
     text-decoration: none;
 }
+
+
+/* buttons */
