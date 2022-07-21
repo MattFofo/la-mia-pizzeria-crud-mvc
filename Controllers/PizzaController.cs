@@ -107,7 +107,7 @@ namespace la_mia_pizzeria.Controllers
         {
             using (PizzeriaContext context = new PizzeriaContext())
             {
-                Pizza pizza = context.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+                Pizza pizza = context.Pizzas.Where(p => p.Id == id).Include(p => p.Category).Include(p => p.Ingredients).FirstOrDefault();
 
                 if (pizza == null) return NotFound();
 
@@ -116,7 +116,16 @@ namespace la_mia_pizzeria.Controllers
                 PizzaPivotCrud model = new PizzaPivotCrud();
                 model.Pizza = pizza;
                 model.Categories = categories;
+                model.Ingredients = GetIngredientsList();
+                model.SelectedIngredients = new List<string>();
 
+                if (pizza.Ingredients != null)
+                {
+                    foreach (Ingredient ingredient in pizza.Ingredients)
+                    {
+                        model.SelectedIngredients.Add(ingredient.Id.ToString());
+                    }
+                }
 
                 return View(model);
             }
